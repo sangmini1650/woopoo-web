@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>우푸의 숲 복원 이야기 · 2026 그린캠프</title>
+<meta name="description" content="우푸와 함께 산불 피해지의 숲을 복원하는 이야기" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="stage" id="stage">
+
+    <!-- Page 1 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page1.png"></div>
+    </section>
+
+    <!-- Page 2 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page2.png"></div>
+    </section>
+
+    <!-- Page 3 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page3.png"></div>
+    </section>
+
+    <!-- Page 4 -->
+    <section class="scene" data-steps="4">
+      <div class="grid4">
+        <div class="cell" data-i="1"><img src="assets/cell4_1.png"></div>
+        <div class="cell" data-i="2"><img src="assets/cell4_2.png"></div>
+        <div class="cell" data-i="3"><img src="assets/cell4_3.png"></div>
+        <div class="cell" data-i="4"><img src="assets/cell4_4.png"></div>
+      </div>
+    </section>
+
+    <!-- Page 5 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page5.png"></div>
+    </section>
+
+    <!-- Page 6 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page6.png"></div>
+    </section>
+
+    <!-- Page 7 -->
+    <section class="scene" data-steps="3">
+      <div class="row3">
+        <div class="col-cell" data-i="1"><img src="assets/page7_1.jpg"></div>
+        <div class="col-cell" data-i="2"><img src="assets/page7_2.jpg"></div>
+        <div class="col-cell" data-i="3"><img src="assets/page7_3.jpg"></div>
+      </div>
+    </section>
+
+    <!-- Page 8 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page8.png"></div>
+    </section>
+
+    <!-- Page 9 -->
+    <section class="scene" data-steps="1">
+      <div class="sticker-wrap"><img src="assets/page9.png"></div>
+    </section>
+
+  </div>
+
+  <div class="chrome">
+    <a class="home-link" href="https://re-forest-2026.vercel.app" target="_top">← 메인 사이트</a>
+    <div class="counter"><span id="sceneNum">1</span> / 9</div>
+    <div class="tap-zone tap-left" id="tapLeft"></div>
+    <div class="tap-zone tap-right" id="tapRight"></div>
+    <button class="replay-btn" id="replayBtn">🔁 처음부터 다시보기</button>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+
+<script src="js/script.js"></script>
+</body>
+</html>
