@@ -65,7 +65,7 @@
   .bubbles-stack .bubble{opacity:0;transform:translateY(10px);animation:bubbleIn .55s cubic-bezier(.2,.8,.25,1) forwards}
 
   .k-eyebrow{font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--moss-deep);margin-bottom:10px;background:rgba(63,157,79,.12);padding:5px 13px;border-radius:999px;display:inline-block}
-  .headline{font-family:var(--shout);font-size:clamp(20px,6vw,30px);color:var(--ink);line-height:1.4;margin-bottom:6px}
+  .headline{font-family:var(--sans);font-weight:900;font-size:clamp(20px,6vw,30px);color:var(--ink);line-height:1.4;margin-bottom:6px}
   .headline b{color:var(--moss-deep)}
 
   /* ===== nav chrome ===== */
@@ -94,7 +94,6 @@
   .bg-forest{background:linear-gradient(180deg,#bfe6c8 0%,#8fce9a 55%,#5f9c4a 100%)}
   .bg-relief{background:linear-gradient(180deg,#fde6c6 0%,#f6cfa0 100%)}
   .bg-mission{background:linear-gradient(180deg,#9fe0c0 0%,#6fcf9a 45%,#3fae7a 100%)}
-  .bg-leafpage{background:linear-gradient(180deg,#eaf6e4 0%,#d8ecd0 100%)}
 
   .ground{position:absolute;left:0;right:0;bottom:0;height:34%}
   .ground svg{width:100%;height:100%;display:block}
@@ -142,15 +141,6 @@
 
   .btn2{position:relative;z-index:12;font-family:var(--sans);font-size:13px;font-weight:700;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;background:var(--moss-deep);color:#fff;box-shadow:0 8px 18px rgba(28,91,57,.28)}
   .btn2:disabled{opacity:.35;cursor:not-allowed}
-
-  /* final leaf scene */
-  .tree-wrap{position:relative;width:min(80vw,300px)}
-  .leaf-count{font-size:12px;color:var(--moss-deep);margin-top:10px;font-weight:600}
-  .leaf-form{position:relative;z-index:12;max-width:320px;width:100%;margin:14px auto 0;display:flex;gap:7px}
-  .leaf-form input{flex:1;font-family:var(--sans);font-size:13px;padding:11px 13px;border-radius:999px;border:1.5px solid rgba(28,91,57,.3);background:#fff;color:var(--ink)}
-  .leaf-form input:focus{outline:none;border-color:var(--moss)}
-  .leaf{transform-origin:center;animation:leafpop .5s cubic-bezier(.3,1.7,.4,1)}
-  @keyframes leafpop{from{opacity:0;transform:scale(0) rotate(-30deg)}to{opacity:1;transform:scale(1) rotate(var(--rot,0deg))}}
 
   @media(prefers-reduced-motion:reduce){
     .float,.woopu-bob,.sparkle,.arm-r,.arm-l,.swipe-hint{animation:none!important}
@@ -305,27 +295,6 @@
           <span class="mb2">Forest Restorer</span>
         </div>
       </div>
-      <div class="swipe-hint">화면을 눌러 마지막으로 →</div>
-    </section>
-
-    <!-- PAGE 10 : 나뭇잎 남기기 -->
-    <section class="scene bg-leafpage" data-steps="1">
-      <div class="scene__content">
-        <div class="k-eyebrow">FOREST RESTORER · MESSAGE</div>
-        <div class="headline">숲에게 전하고 싶은<br><b>한마디를 남겨주세요</b></div>
-        <div class="tree-wrap">
-          <svg viewBox="0 0 400 320" id="treeSvg" aria-hidden="true">
-            <path d="M200,300 L200,190 M200,220 C200,190 150,195 140,150 M200,210 C200,180 250,185 262,140 M200,190 C200,165 175,168 168,130 M200,190 C200,165 225,168 234,130"
-              stroke="#7a5a34" stroke-width="7" fill="none" stroke-linecap="round"/>
-            <g id="leafLayer"></g>
-          </svg>
-        </div>
-        <p class="leaf-count" id="leafCount">아직 아무도 나뭇잎을 남기지 않았어요</p>
-        <form class="leaf-form" id="leafForm">
-          <input id="leafInput" type="text" maxlength="50" placeholder="예: 오래오래 푸르길" autocomplete="off" />
-          <button class="btn2" type="submit">🌱 남기기</button>
-        </form>
-      </div>
     </section>
 
   </div>
@@ -448,48 +417,6 @@
   },{passive:true});
 
   render(true);
-
-  /* ---------- 나뭇잎 남기기 ---------- */
-  var leafLayer=document.getElementById('leafLayer');
-  var leafCount=document.getElementById('leafCount');
-  var leafForm=document.getElementById('leafForm');
-  var leafInput=document.getElementById('leafInput');
-  var SLOTS=[[140,150],[168,130],[234,130],[262,140],[155,140],[245,140],[180,120],[220,120],[200,110],[150,165],[250,165],[130,160],[270,160],[165,110],[235,110],[190,95],[210,95],[145,175],[255,175],[175,150],[225,150],[200,135],[160,120],[240,120]];
-  var COLORS=['#3f9d4f','#66bb5e','#7fc95f','#4fae55'];
-  var KEY='woopu_leaves_v2';
-  function loadLeaves(){try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){return [];}}
-  function saveLeaves(list){try{localStorage.setItem(KEY,JSON.stringify(list));}catch(e){}}
-  function drawLeaf(msg,i,animate){
-    var slot=SLOTS[i%SLOTS.length];
-    var x=slot[0]+((i*37)%13)-6, y=slot[1]+((i*53)%13)-6;
-    var rot=((i*29)%60)-30, color=COLORS[i%COLORS.length];
-    var g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    g.setAttribute('class','leaf');
-    g.setAttribute('transform','translate('+x+','+y+') rotate('+rot+')');
-    g.style.setProperty('--rot',rot+'deg');
-    if(!animate) g.style.animation='none';
-    var p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d','M0,-9 C7,-9 11,-3 11,3 C11,9 5,13 0,13 C-5,13 -11,9 -11,3 C-11,-3 -7,-9 0,-9 Z');
-    p.setAttribute('fill',color);
-    var t=document.createElementNS('http://www.w3.org/2000/svg','title'); t.textContent=msg;
-    g.appendChild(p); g.appendChild(t);
-    leafLayer.appendChild(g);
-  }
-  function refresh(n){leafCount.textContent = n>0 ? ('지금까지 '+n+'명이 나뭇잎을 남겼어요 🍃') : '아직 아무도 나뭇잎을 남기지 않았어요';}
-  var leaves=loadLeaves();
-  leaves.forEach(function(it,i){drawLeaf(it.m,i,false);});
-  refresh(leaves.length);
-  leafForm.addEventListener('submit',function(e){
-    e.preventDefault();
-    var msg=leafInput.value.trim();
-    if(!msg)return;
-    leaves.push({m:msg,t:Date.now()});
-    if(leaves.length>60) leaves=leaves.slice(leaves.length-60);
-    saveLeaves(leaves);
-    drawLeaf(msg,leaves.length-1,true);
-    refresh(leaves.length);
-    leafInput.value='';
-  });
 })();
 </script>
 </body>
