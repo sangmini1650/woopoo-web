@@ -38,19 +38,18 @@
   .float{animation:floaty 3.6s ease-in-out infinite}
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-  /* ===== WOOPU (modular cute SVG) ===== */
-  .woopu-wrap{position:relative}
-  .woopu svg{overflow:visible}
-  .arm-r{transform-box:fill-box;transform-origin:78% 60%}
-  .arm-l{transform-box:fill-box;transform-origin:22% 60%}
-  @keyframes wave{0%,100%{transform:rotate(0deg)}30%{transform:rotate(-42deg)}55%{transform:rotate(-14deg)}80%{transform:rotate(-36deg)}}
-  .woopu.pose-wave .arm-r{animation:wave 1.5s ease-in-out 3}
-  .woopu.pose-victory .arm-r{transform:rotate(-60deg)} .woopu.pose-victory .arm-l{transform:rotate(60deg)}
-  .woopu.pose-worried .arm-r{transform:rotate(-96deg) translate(1px,-3px)} .woopu.pose-worried .arm-l{transform:rotate(96deg) translate(-1px,-3px)}
-  .woopu.pose-relieved .arm-r{transform:rotate(-10deg)} .woopu.pose-relieved .arm-l{transform:rotate(10deg)}
-  .woopu.pose-point .arm-r{transform:rotate(-26deg)}
-  .woopu-bob{animation:bob 3s ease-in-out infinite}
-  @keyframes bob{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-7px) rotate(-1.2deg)}}
+  /* ===== WOOPU (real character artwork, animated) ===== */
+  .woopu-wrap{position:relative;display:inline-block}
+  .woopu-wrap img{width:min(52vw,220px);filter:drop-shadow(0 14px 18px rgba(20,40,15,.18))}
+  .woopu-wrap.mini img{width:min(30vw,90px);filter:drop-shadow(0 8px 10px rgba(20,40,15,.16))}
+  .woopu-bob{animation:bob 3.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-8px) rotate(-1.4deg)}}
+  @keyframes waveWiggle{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-4deg)}50%{transform:rotate(3deg)}75%{transform:rotate(-3deg)}}
+  .pose-wave img{animation:waveWiggle 1.3s ease-in-out 3}
+  @keyframes runBounce{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+  .pose-run img{animation:runBounce 1s ease-in-out infinite}
+  @keyframes victoryPop{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.05) rotate(-2deg)}}
+  .pose-victory img{animation:victoryPop 1.8s ease-in-out infinite}
   .sparkle{animation:sparkle 1.4s ease-in-out infinite}
   @keyframes sparkle{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1.15)}}
 
@@ -117,12 +116,11 @@
   .chk.warn span{color:var(--ember)}
 
   /* grid4 / row3 (avatar reveal) */
-  .grid4{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:340px;width:100%;margin:16px auto 0}
-  .g4cell{background:rgba(255,255,255,.85);border-radius:16px;padding:14px 8px 10px;opacity:0;transform:scale(.8) rotate(-2deg)}
+  .grid4{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:380px;width:100%;margin:16px auto 0}
+  .g4cell{background:#fff;border-radius:16px;padding:4px;opacity:0;transform:scale(.8) rotate(-2deg);overflow:hidden;box-shadow:0 8px 18px rgba(20,40,15,.12)}
   .g4cell.show{animation:gridPop .5s cubic-bezier(.2,.8,.25,1) forwards}
   @keyframes gridPop{to{opacity:1;transform:scale(1) rotate(0)}}
-  .g4cell .glabel{font-size:11px;font-weight:700;color:var(--moss-deep);margin-top:6px}
-  .g4cell .gtool{font-size:10.5px;color:#6b6350;margin-top:2px}
+  .g4cell img{width:100%;height:100%;object-fit:cover;border-radius:13px;display:block}
 
   .row3{display:flex;gap:10px;max-width:420px;width:100%;margin:16px auto 0}
   .r3cell{flex:1;background:rgba(255,255,255,.88);border-radius:16px;padding:16px 8px;opacity:0;transform:translateY(14px)}
@@ -168,7 +166,7 @@
     <!-- PAGE 1 : 우푸 등장 -->
     <section class="scene bg-cream" data-steps="1">
       <div class="scene__content">
-        <div class="woopu-wrap pop woopu-bob" id="w1"></div>
+        <div class="woopu-wrap pop woopu-bob pose-wave" id="w1"></div>
         <div class="bubbles-stack" id="bubbles1">
           <div class="bubble" style="animation-delay:.15s">안녕! 나는 <b>복원가 우푸</b>야! <span class="sparkle" style="display:inline-block">✨</span></div>
           <div class="bubble" style="animation-delay:.55s">경상북도 <b>의성군</b>과 <b>안동</b>의 산에<br>큰불이 났대!</div>
@@ -240,7 +238,7 @@
         <path d="M0,520 Q200,495 400,510 L400,700 L0,700Z" fill="#182410"/>
       </svg>
       <div class="scene__content">
-        <div class="woopu-wrap car-drive pop" id="w5"></div>
+        <div class="woopu-wrap pop pose-run" id="w5"></div>
         <div class="bubble" style="margin-top:20px">첫 번째 숲의 복원을 끝냈어!<br>이번엔 <b>조금 다른 모습</b>의 산으로 가볼까?</div>
       </div>
       <div class="swipe-hint">화면을 눌러 다음으로 →</div>
@@ -249,6 +247,7 @@
     <!-- PAGE 6 : 자연복원이 가능한 숲 (4 steps) -->
     <section class="scene bg-forest" data-steps="5">
       <div class="scene__content">
+        <div class="woopu-wrap mini pop" id="w6" style="margin-bottom:2px"></div>
         <div class="k-eyebrow" style="background:rgba(255,255,255,.5)">CHECK · 이 숲의 상태</div>
         <div class="headline">여긴 조건이 <b>조금 달라</b></div>
         <div class="checklist">
@@ -279,7 +278,7 @@
     <!-- PAGE 8 : 복원 완료 -->
     <section class="scene bg-relief" data-steps="1">
       <div class="scene__content">
-        <div class="woopu-wrap pop woopu-bob" id="w8"></div>
+        <div class="woopu-wrap pop woopu-bob pose-victory" id="w8"></div>
         <div class="bubbles-stack">
           <div class="bubble" style="animation-delay:.1s">휴~</div>
           <div class="bubble" style="animation-delay:.5s">인공복원도, 자연복원도, <b>모두 끝났어!</b></div>
@@ -291,10 +290,11 @@
 
     <!-- PAGE 9 : 미션 컴플리트 -->
     <section class="scene bg-mission" data-steps="1">
-      <svg class="scene__bg" viewBox="0 0 400 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style="opacity:.5">
-        <g fill="#2c6b45"><circle cx="60" cy="520" r="34"/><circle cx="120" cy="540" r="26"/><circle cx="330" cy="510" r="36"/><circle cx="280" cy="545" r="22"/></g>
+      <svg class="scene__bg" viewBox="0 0 400 700" preserveAspectRatio="xMidYMax slice" aria-hidden="true" style="opacity:.18">
+        <g fill="#2c6b45"><circle cx="60" cy="620" r="34"/><circle cx="120" cy="640" r="26"/><circle cx="330" cy="610" r="36"/><circle cx="280" cy="645" r="22"/></g>
       </svg>
       <div class="scene__content">
+        <div class="woopu-wrap pop woopu-bob" id="w9" style="margin-bottom:4px"></div>
         <div class="headline" style="color:#fff">산림이 푸르게 푸르게<br><b style="color:#fff">아름답게 복원되었어!</b></div>
         <p style="color:#eafff0;font-size:13px;margin-top:8px;max-width:320px;line-height:1.7">인공복원과 자연복원, 두 가지 방법이 함께 어우러져<br>숲이 다시 건강을 되찾았어.</p>
         <div class="tags">
@@ -342,52 +342,24 @@
 
 <script>
 (function(){
-  /* ---------- Woopu builder (cute modular SVG) ---------- */
-  function woopu(pose,opts){
-    opts=opts||{};
-    var size=opts.size||150;
-    var showBird=opts.bird!==false;
-    return ''+
-    '<div class="woopu pose-'+pose+'" style="width:'+size+'px">'+
-    '<svg viewBox="0 0 152 200" xmlns="http://www.w3.org/2000/svg">'+
-      '<ellipse cx="76" cy="193" rx="36" ry="6" fill="rgba(40,30,10,.15)"/>'+
-      '<g class="arm-l"><path d="M54,120 C36,122 28,144 33,162" stroke="#3f8a44" stroke-width="17" fill="none" stroke-linecap="round"/><circle cx="33" cy="164" r="9.5" fill="#ffdcb8"/></g>'+
-      '<g class="arm-r"><path d="M98,120 C116,122 124,144 119,162" stroke="#4fae55" stroke-width="17" fill="none" stroke-linecap="round"/><circle cx="119" cy="164" r="9.5" fill="#ffdcb8"/></g>'+
-      '<path d="M38,188 L33,148 Q31,106 76,104 Q121,106 119,148 L114,188 Q76,199 38,188 Z" fill="#4fae55"/>'+
-      '<path d="M50,118 Q76,131 102,118 L102,140 Q76,151 50,140 Z" fill="#255e2b"/>'+
-      '<circle cx="76" cy="74" r="42" fill="#ffdcb8"/>'+
-      '<circle cx="56" cy="85" r="6" fill="#ff9d7a" opacity=".55"/><circle cx="96" cy="85" r="6" fill="#ff9d7a" opacity=".55"/>'+
-      '<circle cx="61" cy="73" r="5.4" fill="#20301f"/><circle cx="93" cy="73" r="5.4" fill="#20301f"/>'+
-      '<circle cx="63" cy="71" r="1.6" fill="#fff"/><circle cx="95" cy="71" r="1.6" fill="#fff"/>'+
-      (pose==='worried'?'<path d="M65,91 Q76,86 87,91" stroke="#20301f" stroke-width="2.6" fill="none" stroke-linecap="round"/>':
-       '<path d="M64,88 Q76,99 88,88" stroke="#20301f" stroke-width="3" fill="none" stroke-linecap="round"/>')+
-      '<g fill="#57c9ee"><circle cx="52" cy="54" r="19"/><circle cx="76" cy="45" r="21"/><circle cx="100" cy="54" r="19"/></g>'+
-      '<path d="M26,50 Q76,10 126,50 L126,58 Q76,26 26,58 Z" fill="#d8bc8c"/>'+
-      '<path d="M38,50 Q76,22 114,50 Q114,38 76,18 Q38,38 38,50Z" fill="#ecd6a8"/>'+
-      '<path d="M44,54 L40,84 M108,54 L112,84" stroke="#a8895c" stroke-width="2.4" stroke-linecap="round"/>'+
-      '<circle cx="40" cy="86" r="2.8" fill="#8a6a45"/><circle cx="112" cy="86" r="2.8" fill="#8a6a45"/>'+
-      (showBird?'<g transform="translate(94,10)"><ellipse cx="11" cy="9" rx="13" ry="10" fill="#8fe0f4"/><path d="M-1,7 Q-10,2 -16,7 Q-9,9 -1,11Z" fill="#65c4de"/><circle cx="21" cy="6" r="2.2" fill="#22333a"/><path d="M24,7 L31,8 L24,10.5Z" fill="#ff9d5c"/></g>':'')+
-    '</svg></div>';
+  /* ---------- Woopu (real character artwork) ---------- */
+  function woopu(pose,file){
+    return '<img src="assets/'+file+'" alt="우푸" draggable="false" />';
   }
-  document.getElementById('w1').innerHTML = woopu('wave');
-  document.getElementById('w2').innerHTML = woopu('worried');
-  document.getElementById('w5').innerHTML = woopu('point');
-  document.getElementById('w8').innerHTML = woopu('relieved');
+  document.getElementById('w1').innerHTML = woopu('wave','wave.png');
+  document.getElementById('w2').innerHTML = woopu('worried','worried.png');
+  document.getElementById('w5').innerHTML = woopu('run','run.png');
+  document.getElementById('w8').innerHTML = woopu('victory','victory.png');
+  document.getElementById('w9').innerHTML = woopu('cheer','cheer.png');
+  document.getElementById('w6').innerHTML = woopu('point','point.png');
 
-  /* mini avatars for 분신술 grid */
-  var MINI=[
-    {tool:'🪏',label:'토양개량',desc:'영양분 주기'},
-    {tool:'🌱',label:'묘목심기',desc:'튼튼하게 심기'},
-    {tool:'🌰',label:'씨앗뿌리기',desc:'골고루 뿌리기'},
-    {tool:'🪵',label:'사방댐 설치',desc:'흙 쓸림 막기'}
-  ];
+  /* 인공복원 4단계 (제공된 실제 이미지 카드 그대로 사용) */
+  var GRID_IMGS=['cell4_1.png','cell4_2.png','cell4_3.png','cell4_4.png'];
   var grid4=document.getElementById('grid4');
-  MINI.forEach(function(m,i){
+  GRID_IMGS.forEach(function(file,i){
     var cell=document.createElement('div');
     cell.className='g4cell'; cell.setAttribute('data-i',i+1);
-    cell.innerHTML='<div class="woopu-wrap" style="position:relative;display:inline-block">'+woopu('point',{size:70,bird:false})+
-      '<div style="position:absolute;right:-4px;bottom:26px;font-size:20px">'+m.tool+'</div></div>'+
-      '<div class="glabel">'+m.label+'</div><div class="gtool">'+m.desc+'</div>';
+    cell.innerHTML='<img src="assets/'+file+'" alt="우푸'+(i+1)+'" draggable="false" />';
     grid4.appendChild(cell);
   });
 
