@@ -116,17 +116,23 @@
 
   /* grid4 / row3 (avatar reveal) */
   .grid4{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:380px;width:100%;margin:16px auto 0}
+  .grid4--big{max-width:520px;gap:14px;margin-top:26px}
   .g4cell{background:#fff;border-radius:16px;padding:4px;opacity:0;transform:scale(.8) rotate(-2deg);overflow:hidden;box-shadow:0 8px 18px rgba(20,40,15,.12)}
   .g4cell.show{animation:gridPop .5s cubic-bezier(.2,.8,.25,1) forwards}
   @keyframes gridPop{to{opacity:1;transform:scale(1) rotate(0)}}
   .g4cell img{width:100%;height:100%;object-fit:cover;border-radius:13px;display:block}
 
   .row3{display:flex;gap:10px;max-width:420px;width:100%;margin:16px auto 0}
+  .row3--big{max-width:600px;gap:16px;margin-top:26px}
   .r3cell{flex:1;background:rgba(255,255,255,.88);border-radius:16px;padding:16px 8px;opacity:0;transform:translateY(14px)}
   .r3cell.show{animation:r3In .5s cubic-bezier(.2,.8,.25,1) forwards}
   @keyframes r3In{to{opacity:1;transform:none}}
   .r3cell .rt{font-size:12.5px;font-weight:700;color:var(--moss-deep);margin-top:8px}
   .r3cell .rd{font-size:10.5px;color:#6b6350;margin-top:4px;line-height:1.5}
+  .row3--big .r3cell{padding:26px 14px}
+  .row3--big .r3cell>div:first-child{font-size:34px !important}
+  .row3--big .r3cell .rt{font-size:16px}
+  .row3--big .r3cell .rd{font-size:12px;line-height:1.6}
 
   /* CTA link (게임 연결) */
   .sim-cta{margin-top:20px;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.75);border:1.5px dashed var(--moss);max-width:360px;position:relative;z-index:10}
@@ -212,11 +218,7 @@
       <div class="scene__content">
         <div class="k-eyebrow">METHOD · 우푸 분신술!</div>
         <div class="headline">인공복원 <b>방법 4가지</b></div>
-        <div class="grid4" id="grid4"></div>
-        <div class="sim-cta pop" style="margin-top:18px">
-          <p>🎮 실제 데이터로 만든 시뮬레이션에서<br>당신의 선택이 30년 뒤 숲을 어떻게 바꾸는지 확인해보세요.</p>
-          <a href="https://re-forest-2026.vercel.app/#app" target="_blank" rel="noopener">실전 시뮬레이션 체험하기 →</a>
-        </div>
+        <div class="grid4 grid4--big" id="grid4"></div>
       </div>
       <div class="swipe-hint">화면을 눌러 하나씩 심어보기 →</div>
     </section>
@@ -256,11 +258,7 @@
       <div class="scene__content">
         <div class="k-eyebrow" style="background:rgba(255,255,255,.5)">METHOD · 기다림의 기술</div>
         <div class="headline">이번엔 <b>자연복원</b>이야</div>
-        <div class="row3" id="row3"></div>
-        <div class="sim-cta pop" style="margin-top:18px">
-          <p>🎮 같은 산불이어도 조건에 따라 다른 답이 필요해요.<br>자연복원의 결과를 시뮬레이션에서 확인해보세요.</p>
-          <a href="https://re-forest-2026.vercel.app/#app" target="_blank" rel="noopener">실전 시뮬레이션 체험하기 →</a>
-        </div>
+        <div class="row3 row3--big" id="row3"></div>
       </div>
       <div class="swipe-hint">화면을 눌러 하나씩 확인 →</div>
     </section>
