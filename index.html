@@ -124,14 +124,15 @@
 
   .row3{display:flex;gap:10px;max-width:420px;width:100%;margin:16px auto 0}
   .row3--big{max-width:600px;gap:16px;margin-top:26px}
-  .r3cell{flex:1;background:rgba(255,255,255,.88);border-radius:16px;padding:16px 8px;opacity:0;transform:translateY(14px)}
+  .r3cell{flex:1;background:rgba(255,255,255,.92);border-radius:16px;overflow:hidden;opacity:0;transform:translateY(14px);box-shadow:0 8px 18px rgba(20,40,15,.1)}
   .r3cell.show{animation:r3In .5s cubic-bezier(.2,.8,.25,1) forwards}
   @keyframes r3In{to{opacity:1;transform:none}}
-  .r3cell .rt{font-size:12.5px;font-weight:700;color:var(--moss-deep);margin-top:8px}
+  .r3cell .r3img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+  .r3cell .r3body{padding:10px 8px 12px}
+  .r3cell .rt{font-size:12.5px;font-weight:700;color:var(--moss-deep)}
   .r3cell .rd{font-size:10.5px;color:#6b6350;margin-top:4px;line-height:1.5}
-  .row3--big .r3cell{padding:26px 14px}
-  .row3--big .r3cell>div:first-child{font-size:34px !important}
-  .row3--big .r3cell .rt{font-size:16px}
+  .row3--big .r3cell .r3body{padding:14px 12px 16px}
+  .row3--big .r3cell .rt{font-size:15.5px}
   .row3--big .r3cell .rd{font-size:12px;line-height:1.6}
 
   /* CTA link (게임 연결) */
@@ -334,15 +335,16 @@
 
   /* row3 for 자연복원 */
   var ROW3=[
-    {emo:'🌰→🌳',t:'종자갱신',d:'주변 나무에서 씨앗이 떨어져 새 나무로 자라요'},
-    {emo:'🪵→🌿',t:'맹아갱신',d:'그루터기·뿌리에서 새싹이 자라요'},
-    {emo:'🚧',t:'출입 제한',d:'사람 출입을 막아 회복 시간을 줘요'}
+    {img:'natural_seed.jpg',t:'종자갱신',d:'주변 나무에서 씨앗이 떨어져 새 나무로 자라요'},
+    {img:'natural_sprout.jpg',t:'맹아갱신',d:'그루터기·뿌리에서 새싹이 자라요'},
+    {img:'natural_fence.jpg',t:'출입 제한',d:'사람 출입을 막아 회복 시간을 줘요'}
   ];
   var row3=document.getElementById('row3');
   ROW3.forEach(function(r,i){
     var cell=document.createElement('div');
     cell.className='r3cell'; cell.setAttribute('data-i',i+1);
-    cell.innerHTML='<div style="font-size:22px">'+r.emo+'</div><div class="rt">'+r.t+'</div><div class="rd">'+r.d+'</div>';
+    cell.innerHTML='<img class="r3img" src="assets/'+r.img+'" alt="'+r.t+'" draggable="false" />'+
+      '<div class="r3body"><div class="rt">'+r.t+'</div><div class="rd">'+r.d+'</div></div>';
     row3.appendChild(cell);
   });
 
